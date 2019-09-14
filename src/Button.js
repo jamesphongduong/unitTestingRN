@@ -15,7 +15,7 @@ const styles = {
   textStyle: {
     alignSelf: 'center',
     color: '#fff',
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: '600',
   },
   buttonStyle: {
