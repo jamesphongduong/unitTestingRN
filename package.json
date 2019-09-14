@@ -33,6 +33,11 @@
     ],
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
-    ]
+    ],
+    "coverageDirectory": "./reports",
+    "collectCoverage": true,
+    "collectCoverageOnlyFrom": {
+      "src/Button.js": true
+    }
   }
 }

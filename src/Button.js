@@ -1,21 +1,50 @@
-import React from 'react';
-import {Text, TouchableOpacity} from 'react-native';
+import React, {Component} from 'react';
+import {Text, TouchableOpacity, Linking} from 'react-native';
 
-const Button = props => {
-  const {buttonStyle, textStyle} = styles;
-  const {onPress, label} = props;
-  return (
-    <TouchableOpacity onPress={onPress} style={buttonStyle}>
-      <Text style={textStyle}>{label}</Text>
-    </TouchableOpacity>
-  );
+// 1. Changed to a class based component
+class Button extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  // 2. Custom function called onPress TouchableOpacity
+  onPressHandler = () => {
+    const {onPress, url} = this.props;
+    if (url) {
+      Linking.openURL(url);
+    }
+    onPress();
+  };
+
+  render() {
+    const {buttonStyle, textStyle} = styles;
+    const {label, primary} = this.props;
+
+    // 3. Change color of button depending on 'primary' prop
+    const newButtonStyle = primary
+      ? buttonStyle
+      : [
+          buttonStyle,
+          {backgroundColor: '#f34541', borderBottomColor: '#a43532'},
+        ];
+
+    return (
+      <TouchableOpacity onPress={this.onPressHandler} style={newButtonStyle}>
+        <Text style={textStyle}>{label}</Text>
+      </TouchableOpacity>
+    );
+  }
+}
+
+Button.defaultProps = {
+  primary: true,
 };
 
 const styles = {
   textStyle: {
     alignSelf: 'center',
     color: '#fff',
-    fontSize: 12,
+    fontSize: 16,
     fontWeight: '600',
   },
   buttonStyle: {
